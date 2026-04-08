@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Hub</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #111;
+  color: #fff;
+}
+
+header {
+  background: #e50914;
+  padding: 15px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+nav {
+  background: #000;
+  padding: 10px;
+  text-align: center;
+}
+nav a {
+  color: white;
+  margin: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+nav a:hover {
+  color: #e50914;
+}
+
+.container {
+  padding: 20px;
+}
+
+/* SECTION CONTROL */
+.section {
+  display: none;
+}
+.section.active {
+  display: block;
+}
+
+/* SEARCH */
+.search-box {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.search-box input {
+  padding: 10px;
+  width: 60%;
+  border-radius: 5px;
+  border: none;
+}
+
+/* MOVIES */
+.movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #222;
+  padding: 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.rating {
+  color: gold;
+}
+
+.card button {
+  background: #e50914;
+  border: none;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+}
+
+/* PLAYER */
+.player-section {
+  margin-top: 20px;
+}
+
+iframe {
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+  border: none;
+}
+
+/* GALLERY */
+.gallery img {
+  width: 200px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 10px;
+  background: #222;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>🎬 Movie Hub</header>
+
+<nav>
+  <a onclick="showSection('home')">Home</a>
+  <a onclick="showSection('gallery')">Gallery</a>
+  <a onclick="showSection('about')">About</a>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="section active">
+<div class="container">
+
+<div class="search-box">
+  <input type="text" id="search" placeholder="Search movie..." onkeyup="searchMovie()">
+</div>
+
+<h2>🔥 Popular Movies</h2>
+
+<div class="movies" id="movieList">
+
+<div class="card">
+  <img src="https://img.youtube.com/vi/YoHD9XEInc0/0.jpg">
+  <h3>Inception</h3>
+  <div class="rating">⭐⭐⭐⭐⭐</div>
+  <button onclick="playMovie('YoHD9XEInc0','Inception')">Watch Trailer</button>
+</div>
+
+<div class="card">
+  <img src="https://img.youtube.com/vi/6ZfuNTqbHE8/0.jpg">
+  <h3>Avengers: Infinity War</h3>
+  <div class="rating">⭐⭐⭐⭐⭐</div>
+  <button onclick="playMovie('6ZfuNTqbHE8','Avengers: Infinity War')">Watch Trailer</button>
+</div>
+
+<div class="card">
+  <img src="https://img.youtube.com/vi/TcMBFSGVi1c/0.jpg">
+  <h3>Avengers: Endgame</h3>
+  <div class="rating">⭐⭐⭐⭐⭐</div>
+  <button onclick="playMovie('TcMBFSGVi1c','Avengers: Endgame')">Watch Trailer</button>
+</div>
+
+<div class="card">
+  <img src="https://img.youtube.com/vi/JfVOs4VSpmA/0.jpg">
+  <h3>Spider-Man: No Way Home</h3>
+  <div class="rating">⭐⭐⭐⭐⭐</div>
+  <button onclick="playMovie('JfVOs4VSpmA','Spider-Man: No Way Home')">Watch Trailer</button>
+</div>
+
+<div class="card">
+  <img src="https://img.youtube.com/vi/mqqft2x_Aa4/0.jpg">
+  <h3>The Batman</h3>
+  <div class="rating">⭐⭐⭐⭐</div>
+  <button onclick="playMovie('mqqft2x_Aa4','The Batman')">Watch Trailer</button>
+</div>
+
+</div>
+
+<div class="player-section">
+  <h2 id="nowPlaying">🎥 Now Playing: None</h2>
+
+  <iframe id="player"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
+</div>
+</div>
+
+<!-- GALLERY -->
+<div id="gallery" class="section">
+  <div class="container">
+    <h2>🎬 Movie Gallery</h2>
+    <div class="gallery">
+      <img src="https://img.youtube.com/vi/YoHD9XEInc0/0.jpg">
+      <img src="https://img.youtube.com/vi/6ZfuNTqbHE8/0.jpg">
+      <img src="https://img.youtube.com/vi/TcMBFSGVi1c/0.jpg">
+      <img src="https://img.youtube.com/vi/JfVOs4VSpmA/0.jpg">
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="section">
+  <div class="container">
+    <h2>📖 About Movie Hub</h2>
+    <p>This website lets you search movies and watch trailers easily.</p>
+    <p>Created by janloyd alias 💪🔥</p>
+  </div>
+</div>
+
+<footer>
+© 2026 Movie Hub | created by alias janloyd
+</footer>
+
+<script>
+
+/* NAVIGATION */
+function showSection(sectionId) {
+  let sections = document.querySelectorAll('.section');
+  sections.forEach(sec => sec.classList.remove('active'));
+  document.getElementById(sectionId).classList.add('active');
+}
+
+/* PLAYER */
+function playMovie(id, title) {
+  let player = document.getElementById('player');
+  player.src = "https://www.youtube.com/embed/" + id + "?autoplay=1";
+
+  document.getElementById('nowPlaying').innerText =
+    "🎥 Now Playing: " + title;
+
+  setTimeout(() => {
+    window.open("https://www.youtube.com/watch?v=" + id, "_blank");
+  }, 1000);
+}
+
+/* SEARCH */
+function searchMovie() {
+  let input = document.getElementById("search").value.toLowerCase();
+  let cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    let title = card.querySelector("h3").innerText.toLowerCase();
+    card.style.display = title.includes(input) ? "block" : "none";
+  });
+}
+
+</script>
+
+</body>
+</html>
